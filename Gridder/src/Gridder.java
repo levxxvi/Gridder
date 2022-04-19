@@ -678,9 +678,26 @@ public class Gridder extends javax.swing.JFrame
     }//GEN-LAST:event_jSliderDelayStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("1");
-        draw();
+        //original code
+        /*System.out.println("1");
+        draw();*/
+
+        for(int i = 0; i < 100; i++){
+            Graphics b1;
+            //draw each square (remember that squareSize is size of each square...
+            //fix
+            b1.setColor(Color.white);
+            b1.setColor(colors[ grid[c][r] ] );
+            b1.fillRect(c*squareSize, r*squareSize, squareSize, squareSize);
+            b1.setColor(borderColor);
+            b1.drawRect(c*squareSize, r*squareSize, squareSize, squareSize);
+
+
+            drawSquares(b1);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.out.println("2");
     }//GEN-LAST:event_jButton2ActionPerformed
