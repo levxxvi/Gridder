@@ -762,39 +762,40 @@ public class Gridder extends javax.swing.JFrame
         //note: I will only check rows/columns 1-98 so my code won't break when I hit
         //end edge!
 
+        //white to black
         for (int row = 1; row < gridCount - 1; row++){
             for (int col = 1; col < gridCount - 1; col++) {
-                if (grid[col][row - 1] == 1) { //check above temp[col][row]==1;
-                    temp[col][row] = 0;
-                }
-                if (grid[col][row + 1] == 1){ //check below
-                    temp[col][row] = 0;
-                }
-                if (grid[col-1][row]==1) { //check to the left
-                    temp[col][row] = 0;
-                }
-                if (grid[col+1][row]==1) { //check to the right
-                    temp[col][row] = 0;
-                }
                 if (grid[col][row] == 1){
                     temp[col][row] = 0;
                 }
+                if (grid[col][row] == 0){
+                    temp[col][row] = 1;
+                }
             } //col
         } //row
+
         int edge1 = 0;
         int edge2 = 99;
         for(int i = 0; i < gridCount; i++){
             if (grid[edge1][i] == 1){
                 temp[edge1][i] = 0;
+            } else{
+                temp[edge1][i] = 1;
             }
             if (grid[i][edge1] == 1){
                 temp[i][edge1] = 0;
+            } else{
+                temp[i][edge1] = 1;
             }
             if (grid[edge2][i] == 1){
                 temp[edge2][i] = 0;
+            } else{
+                temp[edge2][i] = 1;
             }
             if (grid[i][edge2] == 1){
                 temp[i][edge2] = 0;
+            } else{
+                temp[i][edge2] = 1;
             }
         }
 
