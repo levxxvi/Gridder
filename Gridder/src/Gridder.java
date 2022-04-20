@@ -807,6 +807,27 @@ public class Gridder extends javax.swing.JFrame
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("7");
+        int[][] temp = new int[100][100];
+
+        //copy contents of grid into temp
+        for (int row = 0; row < 100; row++) {
+            for (int col = 0; col < 100; col++) {
+                temp[col][row] = grid[col][row];
+            }
+        }
+
+        int count = 0;
+        //two for loops: one for row and one for column, no edge cases
+        for (int row = 1; row < gridCount - 1; row++){
+            for (int col = 1; col < gridCount - 1; col++){
+                if(grid[col][row] == 0){
+                    if (grid[col][row-1] == 1){
+
+                    }
+                }
+            }
+        }
+
 
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
