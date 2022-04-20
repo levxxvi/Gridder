@@ -700,6 +700,7 @@ public class Gridder extends javax.swing.JFrame
         draw();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.out.println("3");
 
@@ -712,7 +713,8 @@ public class Gridder extends javax.swing.JFrame
         }
         draw();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("4");
 
@@ -729,6 +731,7 @@ public class Gridder extends javax.swing.JFrame
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
 
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("5");
 
@@ -739,23 +742,82 @@ public class Gridder extends javax.swing.JFrame
             j--;
         }
         draw();
-
     }//GEN-LAST:event_jButton11ActionPerformed
+
+
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("6");
 
+        //create temp
+        int[][] temp = new int[100][100];
+
+        //copy contents of grid into temp
+        for (int row = 0; row < 100; row++) {
+            for (int col = 0; col < 100; col++) {
+                temp[col][row] = grid[col][row];
+            }
+        }
+        //scan grid and MAKE CHANGES TO TEMP, not grid!
+        //stop and think about WHY we don't want to change the original grid.
+        //note: I will only check rows/columns 1-98 so my code won't break when I hit
+        //end edge!
+
+        for (int row = 1; row < gridCount - 1; row++){
+            for (int col = 1; col < gridCount - 1; col++) {
+                if (grid[col][row - 1] == 1) { //check above temp[col][row]==1;
+                    temp[col][row] = 0;
+                }
+                if (grid[col][row + 1] == 1){ //check below
+                    temp[col][row] = 0;
+                }
+                if (grid[col-1][row]==1) { //check to the left
+                    temp[col][row] = 0;
+                }
+                if (grid[col+1][row]==1) { //check to the right
+                    temp[col][row] = 0;
+                }
+                if (grid[col][row] == 1){
+                    temp[col][row] = 0;
+                }
+            } //col
+        } //row
+        int edge1 = 0;
+        int edge2 = 99;
+        for(int i = 0; i < gridCount; i++){
+            if (grid[edge1][i] == 1){
+                temp[edge1][i] = 0;
+            }
+            if (grid[i][edge1] == 1){
+                temp[i][edge1] = 0;
+            }
+            if (grid[edge2][i] == 1){
+                temp[edge2][i] = 0;
+            }
+            if (grid[i][edge2] == 1){
+                temp[i][edge2] = 0;
+            }
+        }
+
+        //and finally, make grid equal temp and draw
+        grid = temp;
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("7");
 
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("8");
 
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("9");
 
@@ -767,11 +829,15 @@ public class Gridder extends javax.swing.JFrame
         System.out.println("10");
         draw();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("11");
 
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         System.out.println("12");
