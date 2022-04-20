@@ -679,45 +679,67 @@ public class Gridder extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //original code
-        /*System.out.println("1");
-        draw();*/
+        System.out.println("1");
 
         for(int i = 0; i < 100; i++){
-            Graphics b1;
-            //draw each square (remember that squareSize is size of each square...
-            //fix
-            b1.setColor(Color.white);
-            b1.setColor(colors[ grid[c][r] ] );
-            b1.fillRect(c*squareSize, r*squareSize, squareSize, squareSize);
-            b1.setColor(borderColor);
-            b1.drawRect(c*squareSize, r*squareSize, squareSize, squareSize);
-
-
-            drawSquares(b1);
+            int col = (int)(Math.random()*gridCount);
+            int row = (int)(Math.random()*gridCount);
+            grid[col][row] = 1;
+            draw();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.out.println("2");
+
+        int col = (int)(Math.random()*gridCount);
+        for(int i = 0; i < gridCount; i++){
+            grid[col][i] = 1;
+        }
+        draw();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.out.println("3");
+
+        //clearGrid();
+        int halfway = gridCount/2;
+        for(int i = 0; i < halfway; i++){
+            for(int j = 0; j < gridCount; j++){
+                grid[j][i] = 1;
+            }
+        }
         draw();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-
-
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("4");
 
+        int count = 0;
+        for(int i = 0; i < gridCount; i++){
+            for(int j = 0; j < gridCount; j++){
+                if(grid[i][j] == 1){
+                    count++;
+                }
+            }
+        }
+
+        textInfo.setText(Integer.toString(count));
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("5");
 
+        int j = gridCount-1;
+        for(int i = 0; i < gridCount; i++){
+            grid[i][i] = 1;
+            grid[i][j] = 1;
+            j--;
+        }
         draw();
+
     }//GEN-LAST:event_jButton11ActionPerformed
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("6");
