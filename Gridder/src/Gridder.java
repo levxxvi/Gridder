@@ -816,19 +816,116 @@ public class Gridder extends javax.swing.JFrame
             }
         }
 
-        int count = 0;
+
         //two for loops: one for row and one for column, no edge cases
         for (int row = 1; row < gridCount - 1; row++){
             for (int col = 1; col < gridCount - 1; col++){
+                int count = 0;
                 if(grid[col][row] == 0){
-                    if (grid[col][row-1] == 1){
-
+                    //top-left
+                    if(grid[col-1][row-1] == 1){
+                        count++;
                     }
+                    //top-mid
+                    if(grid[col][row-1] == 1){
+                        count++;
+                    }
+                    //top-right
+                    if(grid[col+1][row-1] == 1){
+                        count++;
+                    }
+                    //mid-left
+                    if(grid[col-1][row] == 1){
+                        count++;
+                    }
+                    //mid-right
+                    if(grid[col+1][row] == 1){
+                        count++;
+                    }
+                    //bottom-left
+                    if(grid[col-1][row+1] == 1){
+                        count++;
+                    }
+                    //bottom-mid
+                    if(grid[col][row+1] == 1){
+                        count++;
+                    }
+                    //bottom-right
+                    if(grid[col+1][row+1] == 1){
+                        count++;
+                    }
+                }
+                if(count == 2){
+                    temp[col][row] = 1;
                 }
             }
         }
 
+        int edge1 = 0;
+        int edge2 = 99;
+        for(int i = 0; i < gridCount; i++){
+            //top row/row 0. ignore top-left-mid-right
+            if (grid[i][edge1] == 0){
+                int count = 0;
+                //mid-left, bottom-left
+                if(i != 0){
+                    if(grid[i - 1][edge1] == 1){
+                        count++;
+                    }
+                    if(grid[i - 1][edge1 + 1] == 1){
+                        count++;
+                    }
+                }
+                //mid-right, bottom-right
+                if(i != gridCount-1){
+                    if(grid[i + 1][edge1] == 1){
+                        count++;
+                    }
+                    if(grid[i + 1][edge1 + 1] == 1){
+                        count++;
+                    }
+                }
+                //bottom-mid
+                if(grid[i][edge1 + 1] == 1){
+                    count++;
+                }
+                if (count == 2){
+                    temp[i][edge1] = 1;
+                }
+            }
 
+            //bottom row/row 99. ignore bot-left-mid-right
+            if (grid[i][edge2] == 0){
+                int count = 0;
+                //top-left, mid-left
+                if(i != 0){
+                    if(grid[i - 1][edge2 - 1] == 1){
+                        count++;
+                    }
+                    if(grid[i - 1][edge2] == 1){
+                        count++;
+                    }
+                }
+                //mid-right, top-right
+                if(i != gridCount-1){
+                    if(grid[i + 1][edge2] == 1){
+                        count++;
+                    }
+                    if(grid[i + 1][edge2 - 1] == 1){
+                        count++;
+                    }
+                }
+                //top-mid
+                if(grid[i][edge2 - 1] == 1){
+                    count++;
+                }
+                if (count == 2){
+                    temp[i][edge2] = 1;
+                }
+            }
+        }
+
+        grid = temp;
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
 
