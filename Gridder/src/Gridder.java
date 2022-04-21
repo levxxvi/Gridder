@@ -816,7 +816,6 @@ public class Gridder extends javax.swing.JFrame
             }
         }
 
-
         //two for loops: one for row and one for column, no edge cases
         for (int row = 1; row < gridCount - 1; row++){
             for (int col = 1; col < gridCount - 1; col++){
@@ -864,6 +863,7 @@ public class Gridder extends javax.swing.JFrame
         int edge1 = 0;
         int edge2 = 99;
         for(int i = 0; i < gridCount; i++){
+            //grid[col][row]
             //top row/row 0. ignore top-left-mid-right
             if (grid[i][edge1] == 0){
                 int count = 0;
@@ -921,6 +921,66 @@ public class Gridder extends javax.swing.JFrame
                 }
                 if (count == 2){
                     temp[i][edge2] = 1;
+                }
+            }
+
+            //left-most column/column 0. ignore top-mid-bot-left
+            if (grid[edge1][i] == 0){
+                int count = 0;
+                //top-mid-right
+                if(i != 0){
+                    if(grid[edge1][i - 1] == 1){
+                        count++;
+                    }
+                    if(grid[edge1 + 1][i - 1] == 1){
+                        count++;
+                    }
+                }
+                //bot-mid-right
+                if(i != gridCount-1){
+                    if(grid[edge1][i + 1] == 1){
+                        count++;
+                    }
+                    if(grid[edge1 + 1][i + 1] == 1){
+                        count++;
+                    }
+                }
+                //mid-right
+                if(grid[edge1 + 1][i] == 1){
+                    count++;
+                }
+                if(count == 2){
+                    temp[edge1][i] = 1;
+                }
+            }
+
+            //right-most column/column 99. ignore top-mid-bot-right
+            if (grid[edge2][i] == 0){
+                int count = 0;
+                //top-left-mid
+                if(i != 0){
+                    if(grid[edge2 - 1][i - 1] == 1){
+                        count++;
+                    }
+                    if(grid[edge2][i- 1] == 1){
+                        count++;
+                    }
+                }
+                //bot-left-mid
+                if(i != gridCount-1){
+                    if(grid[edge2 - 1][i + 1] == 1){
+                        count++;
+                    }
+                    if(grid[edge2][i + 1] == 1){
+                        count++;
+                    }
+                }
+                //mid-left
+                if(grid[edge2-1][i] == 1){
+                    count++;
+                }
+                if(count == 2){
+                    temp[edge2][i] = 1;
                 }
             }
         }
