@@ -1004,7 +1004,7 @@ public class Gridder extends javax.swing.JFrame
 
         for (int row = 1; row < gridCount - 1; row++) {
             for (int col = 1; col < gridCount - 1; col++) {
-                
+
             }
         }
 
