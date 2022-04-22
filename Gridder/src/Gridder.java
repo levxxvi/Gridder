@@ -806,6 +806,7 @@ public class Gridder extends javax.swing.JFrame
 
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        //Sorry that this code is so messy/long
         System.out.println("7");
         int[][] temp = new int[100][100];
 
@@ -1002,12 +1003,21 @@ public class Gridder extends javax.swing.JFrame
             }
         }
 
-        for (int row = 1; row < gridCount - 1; row++) {
-            for (int col = 1; col < gridCount - 1; col++) {
-
+        //move to left
+        for (int row = 0; row < gridCount; row++) {
+            for (int col = 1; col < gridCount; col++) {
+                temp[col-1][row] = grid[col][row];
             }
         }
 
+        //edge case (left-most column -> right-most column)
+        int edge1 = 0;
+        int edge2 = 99;
+        for(int row = 0; row < gridCount; row++){
+            temp[edge2][row] = grid[edge1][row];
+        }
+
+        grid = temp;
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -1015,6 +1025,64 @@ public class Gridder extends javax.swing.JFrame
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("9");
 
+        int[][] temp = new int[100][100];
+
+        //copy contents of grid into temp
+        for (int row = 0; row < 100; row++) {
+            for (int col = 0; col < 100; col++) {
+                temp[col][row] = grid[col][row];
+            }
+        }
+
+        /*
+        90 degree to the right
+        grid[col][row]
+        if 0, 0 -> 99, 0
+        if 44, 44 -> 56, 56
+
+        math ver
+        x, y -> y, -x
+
+        can divide grid into four quadrants
+        q. 1 col 50-99 row 0-49
+        q. 2 col 0-49 row 0-49
+        q. 3 col 0-49 row 50-99
+        q. 4 col 50-99 row 50-99
+
+        50, 50 = 0, 0
+        51, 49 = 1, 1
+         */
+
+        int mid = gridCount/2;
+
+        for(int row = 1; row < gridCount; row++){
+            for(int col = 1; col < gridCount; col++){
+                //51, 49 (1, 1 -> -1, -1) -> 51, 51
+                //54, 47 (4, 3 -> -3, -4) -> 53, 54
+                int newRow = col-mid;
+                int newCol = mid-row;
+                //int newCol = tempRow;
+                //int newRow = tempCol;
+                temp[mid + newCol][mid + newRow] = grid[col][row];
+            }
+        }
+
+        //edge case
+        int edge = 0;
+        for (int i = 0; i < gridCount; i++){
+            //0, 0 (-50, 50 -> 50, 50) 99, 0
+            //22, 0 (-28, 50 -> 50, 28) 99, 78
+
+            //0, 45 (-50, 5 -> 5, 50) 55, 0
+
+            //edge case top row
+            int tempCol = i - mid;
+            int newCol = gridCount - 1;
+            int newRow =
+            temp[newCol][mid] = grid[i][edge];
+        }
+
+        grid = temp;
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
 
