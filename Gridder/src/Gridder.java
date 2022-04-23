@@ -1089,15 +1089,17 @@ public class Gridder extends javax.swing.JFrame
 
             //edit this one vvvv
 
-            temp[0][i] = grid[i][0];
-            temp[i][0] = grid[0][i];
-            temp[99][i] = grid[i][99];
 
-            /*if (newRow >= 0){
-                temp[99][mid - newRow] = grid[i][0];
-            } else{
-                temp[99][mid + newRow] = grid[i][0];
-            }*/
+            temp[99][i] = grid[i][0];
+            temp[0][i] = grid[i][99];
+            temp[i][99] = grid[0][i];
+            temp[i][0] = grid[99][i];
+
+
+            //first rotate: good
+            //second rotate: missing top and bottom row||should be 94, 0 & 94, 99. is 6, 0 and 6, 99
+            //third rotate: missing four||should be 0, 94 & 1, 94 & 98, 94 & 99, 94. is 0, 6 & 1, 6 & 99, 6
+            //fourth rotate: missing two||should be 6, 1 & 6, 98. is 94, 1
         }
 
         grid = temp;
