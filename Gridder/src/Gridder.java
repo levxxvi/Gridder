@@ -1076,17 +1076,28 @@ public class Gridder extends javax.swing.JFrame
             //ignore 0, 45 (-50, 5 -> 5, 50) 55, 0
 
             //edge case top row
+            //30, 0 (-20, 50 -> 50, 20) 0, 20
+            //newCol = 100-1 = 99
+            //newRow = 50 - 30 = 20
+
+            //70, 0 (20, 50 -> 50, 20) 0, 20
+            //newRow = 50 - 70 = -20
+
+            //45, 0 -> 0, 45
             int newCol = gridCount - 1;
-            int newRow = mid - i;
+            int newRow = i - mid;
 
             //edit this one vvvv
-            temp[newCol][newRow] = grid[i][edge];
 
-            /*
-            int newRow = i - mid;
-            int newCol = gridCount - 1;
-            temp[newCol][mid + newRow] = grid[i][edge];
-             */
+            temp[0][i] = grid[i][0];
+            temp[i][0] = grid[0][i];
+            temp[99][i] = grid[i][99];
+
+            /*if (newRow >= 0){
+                temp[99][mid - newRow] = grid[i][0];
+            } else{
+                temp[99][mid + newRow] = grid[i][0];
+            }*/
         }
 
         grid = temp;
