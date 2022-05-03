@@ -1089,14 +1089,18 @@ public class Gridder extends javax.swing.JFrame
 
             //edit this one vvvv
 
-
+            /*
             temp[99][i] = grid[i][0];
             temp[0][i] = grid[i][99];
             temp[i][99] = grid[0][i];
             temp[i][0] = grid[99][i];
+             */
 
             for (int col = 0; col < gridCount; col++){
-                temp[col][0] = grid[col][0];
+                temp[0][col] = grid[col][0];
+                temp[col][0] = grid[0][col];
+                temp[99][col] = grid[col][99];
+                //temp[col][99] = grid[99][col];
             }
 
             //first rotate: good
