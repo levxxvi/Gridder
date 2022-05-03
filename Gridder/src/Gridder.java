@@ -1095,6 +1095,9 @@ public class Gridder extends javax.swing.JFrame
             temp[i][99] = grid[0][i];
             temp[i][0] = grid[99][i];
 
+            for (int col = 0; col < gridCount; col++){
+                temp[col][0] = grid[col][0];
+            }
 
             //first rotate: good
             //second rotate: missing top and bottom row||should be 94, 0 & 94, 99. is 6, 0 and 6, 99
