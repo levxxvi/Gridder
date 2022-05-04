@@ -1055,8 +1055,8 @@ public class Gridder extends javax.swing.JFrame
 
         int mid = gridCount/2;
 
-        for(int row = 1; row < gridCount; row++){
-            for(int col = 1; col < gridCount; col++){
+        for(int row = 1; row < gridCount-1; row++){
+            for(int col = 1; col < gridCount-1; col++){
                 //51, 49 (1, 1 -> -1, -1) -> 51, 51
                 //54, 47 (4, 3 -> -3, -4) -> 53, 54
                 int newRow = col-mid;
@@ -1068,7 +1068,6 @@ public class Gridder extends javax.swing.JFrame
         }
 
         //edge case
-        int edge = 0;
         for (int i = 0; i < gridCount; i++){
             //0, 0 (-50, 50 -> 50, 50) 99, 0
             //22, 0 (-28, 50 -> 50, 28) 99, 78
@@ -1084,8 +1083,8 @@ public class Gridder extends javax.swing.JFrame
             //newRow = 50 - 70 = -20
 
             //45, 0 -> 0, 45
-            int newCol = gridCount - 1;
-            int newRow = i - mid;
+            //int newCol = gridCount - 1;
+            //int newRow = i - mid;
 
             //edit this one vvvv
 
@@ -1096,12 +1095,29 @@ public class Gridder extends javax.swing.JFrame
             temp[i][0] = grid[99][i];
              */
 
-            for (int col = 0; col < gridCount; col++){
-                temp[0][col] = grid[col][0];
-                temp[col][0] = grid[0][col];
-                temp[99][col] = grid[col][99];
-                //temp[col][99] = grid[99][col];
-            }
+            /*temp[99][i] = grid[i][0];
+            temp[0][i] = grid[i][99];
+            if(i != 99|| i != 0){
+                temp[i][99] = grid[0][i];
+                temp[i][0] = grid[99][i];
+            }*/
+
+            temp[i][99] = grid[0][i];
+            temp[i][0] = grid[99][i];
+            temp[99][i] = grid[i][0];
+            temp[0][i] = grid[i][99];
+            /*if(i != 99|| i != 0){
+                temp[99][i] = grid[i][0];
+                temp[0][i] = grid[i][99];
+            }*/
+
+            //grid[col][row]
+            //for (int j = 0; j < gridCount; j++){
+                //temp[99][j] = grid[j][0];
+                //temp[j][99] = grid[0][j];
+                //temp[0][j] = grid[j][99];
+                //temp[j][0] = grid[99][j];
+            //}
 
             //first rotate: good
             //second rotate: missing top and bottom row||should be 94, 0 & 94, 99. is 6, 0 and 6, 99
