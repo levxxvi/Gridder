@@ -1055,7 +1055,7 @@ public class Gridder extends javax.swing.JFrame
 
         int mid = gridCount/2;
 
-        for(int row = 1; row < gridCount-1; row++){
+        for(int row = 1; row < gridCount; row++){
             for(int col = 1; col < gridCount-1; col++){
                 //51, 49 (1, 1 -> -1, -1) -> 51, 51
                 //54, 47 (4, 3 -> -3, -4) -> 53, 54
@@ -1102,14 +1102,29 @@ public class Gridder extends javax.swing.JFrame
                 temp[i][0] = grid[99][i];
             }*/
 
-            temp[i][99] = grid[0][i];
-            temp[i][0] = grid[99][i];
-            temp[99][i] = grid[i][0];
-            temp[0][i] = grid[i][99];
-            /*if(i != 99|| i != 0){
+            int newRow = i-mid;
+            int newCol = mid-i;
+
+            //temp[99][i] = grid[i][0];
+            //temp[0][i] = grid[i][99];
+            //temp[99][i] = grid[i][0];
+            //temp[0][i] = grid[i][99];
+            if(i != 99||i != 0){
+                if(i > mid){
+                    temp[99][mid + newCol] = grid[i][0];
+                    temp[0][mid + newCol] = grid[i][99];
+                    temp[mid + newCol][99] = grid[0][i];
+                    temp[mid + newCol][0] = grid[99][i];
+                }
+                if(i < mid){
+                    temp[99][mid - newCol] = grid[i][0];
+                    temp[0][mid - newCol] = grid[i][99];
+                    temp[mid - newCol][99] = grid[0][i];
+                    temp[mid - newCol][0] = grid[99][i];
+                }
                 temp[99][i] = grid[i][0];
                 temp[0][i] = grid[i][99];
-            }*/
+            }
 
             //grid[col][row]
             //for (int j = 0; j < gridCount; j++){
