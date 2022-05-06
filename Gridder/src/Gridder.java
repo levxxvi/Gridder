@@ -1034,56 +1034,8 @@ public class Gridder extends javax.swing.JFrame
             }
         }
 
-        /*
-        90 degree to the right
-        grid[col][row]
-        if 0, 0 -> 99, 0
-        if 44, 44 -> 56, 56
-
-        math ver
-        x, y -> y, -x
-
-        can divide grid into four quadrants
-        q. 1 col 50-99 row 0-49
-        q. 2 col 0-49 row 0-49
-        q. 3 col 0-49 row 50-99
-        q. 4 col 50-99 row 50-99
-
-        50, 50 = 0, 0
-        51, 49 = 1, 1
-         */
-        //int mid = gridCount/2;
-
         for(int row = 0; row < gridCount; row++){
             for(int col = 0; col < gridCount; col++){
-                //work and old code
-                //51, 49 (1, 1 -> -1, -1) -> 51, 51
-                //54, 47 (4, 3 -> -3, -4) -> 53, 54
-                /*
-                problem: second last on the bottom gone
-                when row = 98;
-                newCol = 50-98 = -48
-                mid + newCol = 50-48
-
-                row = 99; newCol = -49; mid + newCOl = 50-49+1 = 2
-                row = 1; newCOl = 49; mid + newCol = 50 + 49 + 1 = 100; there is no 100 -> error
-                 */
-                /*
-                new error: mid + newRow = 98 does not change.
-                mid + newRow = 98; newRow = 48
-                col
-                 */
-                /*int newRow = col-mid;
-                int newCol = mid-row;
-                if(row != 1){
-                    temp[mid + newCol - 1][mid + newRow] = grid[col][row];
-                } else{
-                    temp[mid + newCol][mid + newRow] = grid[col][row];
-                }*/
-                /*
-                missing: col = 1
-                when row = 98; smth failed
-                 */
                 if(row == 0){
                     temp[gridCount - 1][col] = grid[col][row];
                 } else if(row == 99){
@@ -1093,48 +1045,6 @@ public class Gridder extends javax.swing.JFrame
                 }
             }
         }
-        //work and old code
-        //edge case
-        /*for (int i = 0; i < gridCount; i++){
-            int newCol = mid-i;
-
-            //temp[99][i] = grid[i][0];
-            //temp[0][i] = grid[i][99];
-            //temp[99][i] = grid[i][0];
-            //temp[0][i] = grid[i][99];
-            if(i != 99||i != 0||i != mid){
-                if(i > mid){
-                    temp[99][mid + newCol] = grid[i][0];
-                    temp[0][mid + newCol] = grid[i][99];
-                    temp[mid + newCol][99] = grid[0][i];
-                    temp[mid + newCol][0] = grid[99][i];
-                } else if(i < mid){
-                    temp[99][mid - newCol] = grid[i][0];
-                    temp[0][mid - newCol] = grid[i][99];
-                    temp[mid - newCol][99] = grid[0][i];
-                    temp[mid - newCol][0] = grid[99][i];
-                }
-            } else{
-                temp[99][i] = grid[i][0];
-                temp[0][i] = grid[i][99];
-                temp[i][99] = grid[0][i];
-                temp[i][0] = grid[99][i];
-            }
-            //temp[i][99] = grid[99][i];
-            //grid[col][row]
-            //for (int j = 0; j < gridCount; j++){
-                //temp[99][j] = grid[j][0];
-                //temp[j][99] = grid[0][j];
-                //temp[0][j] = grid[j][99];
-                //temp[j][0] = grid[99][j];
-            //}
-
-            //first rotate: good
-            //second rotate: missing top and bottom row||should be 94, 0 & 94, 99. is 6, 0 and 6, 99
-            //third rotate: missing four||should be 0, 94 & 1, 94 & 98, 94 & 99, 94. is 0, 6 & 1, 6 & 99, 6
-            //fourth rotate: missing two||should be 6, 1 & 6, 98. is 94, 1
-        }*/
-
         grid = temp;
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
